@@ -38,26 +38,26 @@ void Player::run()
             stop = true;
         }
         if (frame.channels()== 3){
+
             //------------------------------------------------------------
             //------------------------------------------------------------
 
-            //Las funciones de procesameinto de imagenes deben de ir aqui, la imagend de entrada es en este punto YCrCb
-            //add the code here
+            //Las funciones de procesameinto de imagenes deben de ir aqui, la imagend de entrada es en este punto es BGR
+
+            //add the code here for exmple
 
             std::vector<cv::Mat> ColorPlanes;
 
-            cv::cvtColor(frame, frame, CV_YCrCb2BGR);
-
             cv::split(frame,ColorPlanes);
-            //cv::equalizeHist(ColorPlanes[0], ColorPlanes[0]);
-            cv::equalizeHist(ColorPlanes[1], ColorPlanes[1]);
-            //cv::equalizeHist(ColorPlanes[2], ColorPlanes[2]);
+
+            cv::equalizeHist(ColorPlanes[0], ColorPlanes[0]);
+            //cv::equalizeHist(ColorPlanes[1], ColorPlanes[1]);
+            cv::equalizeHist(ColorPlanes[2], ColorPlanes[2]);
 
             cv::merge(ColorPlanes,frame);
 
-            //cv::cvtColor(frame, frame, CV_YCrCb2BGR);
-            //*/
             //La imagen se espera que este en BGR en este punto para que el video pueda ser reproducido
+
             //------------------------------------------------------------
             //------------------------------------------------------------
 
