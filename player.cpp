@@ -38,8 +38,11 @@ void Player::run()
             stop = true;
         }
         if (frame.channels()== 3){
+            //------------------------------------------------------------
+            //------------------------------------------------------------
 
             //Las funciones de procesameinto de imagenes deben de ir aqui, la imagend de entrada es en este punto YCrCb
+            //add the code here
 
             std::vector<cv::Mat> ColorPlanes;
 
@@ -55,6 +58,10 @@ void Player::run()
             //cv::cvtColor(frame, frame, CV_YCrCb2BGR);
             //*/
             //La imagen se espera que este en BGR en este punto para que el video pueda ser reproducido
+            //------------------------------------------------------------
+            //------------------------------------------------------------
+
+
             cv::cvtColor(frame, RGBframe, CV_BGR2RGB);
             img = QImage((const unsigned char*)(RGBframe.data),
                               RGBframe.cols,RGBframe.rows,QImage::Format_RGB888);
