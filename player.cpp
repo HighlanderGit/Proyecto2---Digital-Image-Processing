@@ -147,7 +147,7 @@ void Player::run()
 
             for (int i = 0; i< contours.size(); i++){
 
-                qDebug() << "Area " << i <<" = "<< cv::contourArea(contours[i]) ;
+                //qDebug() << "Area " << i <<" = "<< cv::contourArea(contours[i]) ;
                 //if(cv::contourArea(contours[i]) > 60){
                 if(cv::contourArea(contours[i]) > 60 && cv::contourArea(contours[i]) < 300 ){
 
