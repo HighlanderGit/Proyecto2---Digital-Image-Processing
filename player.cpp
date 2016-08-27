@@ -163,6 +163,12 @@ void Player::run()
             //Section 5 Generates the bounding rectacles for the blob and particles in order to draw on top of the original frame
             cv::Rect boundRect;
             std::vector<cv::Point> contours_poly ;
+            // Section 6 Prepares to calculate the closest rectangle to the position of the mouse click.
+            cv::Rect closest = cv::boundingRect( cv::Mat(contours_poly )); // Instead of this, the mouse position should be put here.
+            cv::Rect position_past = cv::boundingRect( cv::Mat(contours_poly ));
+            
+            float distance_current = 0.0;
+            float distance_past = 0.0;
 
             //Calculates the areas of the blobs and chooses if the blob is gargabe or if it a player
             for (int i = 0; i< contours.size(); i++){
@@ -171,25 +177,31 @@ void Player::run()
 
                     cv::approxPolyDP( cv::Mat(contours[i]), contours_poly, 3, true );
                     boundRect = cv::boundingRect( cv::Mat(contours_poly ));
-                    cv::rectangle( frame, boundRect.tl(), boundRect.br(), cv::Scalar(255), 2, 8, 0 );
+                    distance_current = sqrt(pow(boundRect.x-position_past.x,2)-pow(boundRect.y-position_past.y,2));
+                    if (distance_current < distance_past) {
+                        closest = boundRect;
+                    }
+                    distance_past=distance_current;
+
+
+                    if (multiTracking = true){
+
+                        cv::rectangle( frame, boundRect.tl(), boundRect.br(), cv::Scalar(255), 2, 8, 0 );
+                    }
                 }
 
+
             }
-            
-            //-----------------------------------------------------------------------
-            //-----------------------------------------------------------------------
-            //-----------------------------------------------------------------------
 
+            if(pipActive && contours.size()!=0){ // bool pipActive should be user modifiable.
+                //----------  Picture in Picture    ----------------
 
-            //----------  Picture in Picture    ----------------
-
-            cv::Rect roi1 = cv::Rect(150,150,50,50); // cambiar estas constantes por la posicion del centroide mas 
-                                                     // cercano al click del usuario
-            cv::Rect pip = cv::Rect(frame.cols-2*roi1.width-50,50,2*roi1.width,2*roi1.height);
-            cv::Mat small = frame(roi1);
-            cv::Mat subView = frame(pip);
-            cv::resize(small, subView, subView.size(), 0, 0, INTER_LINEAR); // Agranda la imagen de interés
-
+                cv::Rect roi1 = cv::Rect(closest.x,closest.y,50,50);
+                cv::Rect pip = cv::Rect(frame.cols-2*roi1.width-50,50,2*roi1.width,2*roi1.height);
+                cv::Mat small = frame(roi1);
+                cv::Mat subView = frame(pip);
+                cv::resize(small, subView, subView.size(), 0, 0, INTER_LINEAR);
+            }
             //-----------------------------------------------------------------------
             //-----------------------------------------------------------------------
             //-----------------------------------------------------------------------
