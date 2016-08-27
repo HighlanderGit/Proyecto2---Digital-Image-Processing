@@ -185,10 +185,10 @@ void Player::run()
 
             cv::Rect roi1 = cv::Rect(150,150,50,50); // cambiar estas constantes por la posicion del centroide mas 
                                                      // cercano al click del usuario
-            cv::Rect pip = cv::Rect(frame.cols-roi1.width-50,50,roi1.width,roi1.height);
+            cv::Rect pip = cv::Rect(frame.cols-2*roi1.width-50,50,2*roi1.width,2*roi1.height);
             cv::Mat small = frame(roi1);
             cv::Mat subView = frame(pip);
-            small.copyTo(subView);
+            cv::resize(small, subView, subView.size(), 0, 0, INTER_LINEAR); // Agranda la imagen de interés
 
             //-----------------------------------------------------------------------
             //-----------------------------------------------------------------------
