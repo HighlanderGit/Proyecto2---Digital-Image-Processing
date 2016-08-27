@@ -46,6 +46,19 @@ void Player::Play()
 void Player::run()
 {
     int delay = (1000/frameRate);
+    
+    // Boolean values to activate Picture in Picture or Multiplayer tracking
+    bool pipActive = true;
+    bool multiTracking = true;
+
+    // Stores mouse click position or past value of player for tracking.
+    cv::Rect closest;
+    //closest.x = 0;
+    //closest.y = 0;
+    cv::Rect position_past;
+    float distance_current = 0.0;
+    float distance_past = 0.0;
+
     while(!stop){
         if (!capture->read(frame))
         {
@@ -163,9 +176,12 @@ void Player::run()
             //Section 5 Generates the bounding rectacles for the blob and particles in order to draw on top of the original frame
             cv::Rect boundRect;
             std::vector<cv::Point> contours_poly ;
+            
             // Section 6 Prepares to calculate the closest rectangle to the position of the mouse click.
-            cv::Rect closest = cv::boundingRect( cv::Mat(contours_poly )); // Instead of this, the mouse position should be put here.
-            cv::Rect position_past = cv::boundingRect( cv::Mat(contours_poly ));
+
+            // --------------------------------------------------------
+            // If mouse click, change position_past to mouseclick position
+            // --------------------------------------------------------
             
             float distance_current = 0.0;
             float distance_past = 0.0;
@@ -202,6 +218,9 @@ void Player::run()
                 cv::Mat subView = frame(pip);
                 cv::resize(small, subView, subView.size(), 0, 0, INTER_LINEAR);
             }
+            
+            
+            
             //-----------------------------------------------------------------------
             //-----------------------------------------------------------------------
             //-----------------------------------------------------------------------
