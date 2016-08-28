@@ -3,9 +3,14 @@
 #include <QDebug>
 #include <global_variables.h>
 
+
 bool Enhancement=false;
 bool PIP=false;
 bool multiTracking=false;
+int xposition = 0;
+int yposition = 0;
+bool updateXY= false;
+
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -28,6 +33,8 @@ void MainWindow::updatePlayerUI(QImage img)
                                            Qt::KeepAspectRatio, Qt::FastTransformation));
         ui->horizontalSlider->setValue(myPlayer->getCurrentFrame());
         ui->label_2->setText( getFormattedTime( (int)myPlayer->getCurrentFrame()/(int)myPlayer->getFrameRate()) );
+
+        //ui->Yvalue_num->setText(QString::number(150));
     }
 }
 
@@ -129,4 +136,19 @@ void MainWindow::on_TrackPlayers_clicked()
     }else{
         multiTracking=true;
     }
+}
+
+void MainWindow::on_Xvalue_sliderMoved(int position)
+{
+    xposition=position;
+    ui->Xvalue_num->setText(QString::number(position));
+    updateXY=true;
+}
+
+void MainWindow::on_Yvalue_sliderMoved(int position)
+{
+    yposition=position;
+    ui->Yvalue_num->setText(QString::number(position));
+    updateXY=true;
+
 }

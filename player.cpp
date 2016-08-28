@@ -5,6 +5,7 @@
 #include <QDebug>
 #include <global_variables.h>
 
+
 //#include <QThread>
 
 //#include <opencv2/imgproc/imgproc.hpp>
@@ -14,6 +15,8 @@
 //#include <vector>
 //#include <opencv2/opencv.hpp>
 //#include <cmath>
+
+
 
 Player::Player(QObject *parent)
  : QThread(parent)
@@ -184,6 +187,12 @@ void Player::run()
             // If mouse click, change position_past to mouseclick position
             // --------------------------------------------------------
             
+            if(updateXY==true){
+                position_past.x=xposition;
+                position_past.y=yposition;
+                updateXY=false;
+            }
+
             if(Enhancement==true){
                 cv::split(frame,ColorPlanes);
                 cv::equalizeHist(ColorPlanes[0], ColorPlanes[0]);

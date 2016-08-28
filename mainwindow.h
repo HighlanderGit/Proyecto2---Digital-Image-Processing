@@ -38,6 +38,10 @@ private slots:
 
     void on_TrackPlayers_clicked();
 
+    void on_Xvalue_sliderMoved(int position);
+
+    void on_Yvalue_sliderMoved(int position);
+
 private:
     Ui::MainWindow *ui;
     Player* myPlayer;
