@@ -32,6 +32,12 @@ private slots:
 
     void on_horizontalSlider_sliderMoved(int position);
 
+    void on_enhancement_clicked();
+
+    void on_PIP_clicked();
+
+    void on_TrackPlayers_clicked();
+
 private:
     Ui::MainWindow *ui;
     Player* myPlayer;

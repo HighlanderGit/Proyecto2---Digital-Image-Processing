@@ -1,9 +1,11 @@
 #ifndef GLOBAL_VARIABLES
 #define GLOBAL_VARIABLES
 
-static bool Enhancement;
-static bool TrackPlayers;
-static bool PIP;
+
+
+extern bool Enhancement;
+extern bool multiTracking;
+extern bool PIP;
 
 
 #endif // GLOBAL_VARIABLES

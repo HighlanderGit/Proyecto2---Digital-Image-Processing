@@ -16,7 +16,7 @@
   <widget class="QWidget" name="centralWidget">
    <layout class="QVBoxLayout" name="verticalLayout_2">
     <item>
-     <layout class="QGridLayout" name="gridLayout" rowstretch="1,0,0" columnstretch="0,0">
+     <layout class="QGridLayout" name="gridLayout" rowstretch="1" columnstretch="0,0">
       <property name="verticalSpacing">
        <number>6</number>
       </property>
@@ -63,6 +63,13 @@
          </spacer>
         </item>
         <item>
+         <widget class="QPushButton" name="enhancement">
+          <property name="text">
+           <string>Enhancement</string>
+          </property>
+         </widget>
+        </item>
+        <item>
          <spacer name="verticalSpacer_4">
           <property name="orientation">
            <enum>Qt::Vertical</enum>
@@ -76,6 +83,13 @@
          </spacer>
         </item>
         <item>
+         <widget class="QPushButton" name="PIP">
+          <property name="text">
+           <string>PIP</string>
+          </property>
+         </widget>
+        </item>
+        <item>
          <spacer name="verticalSpacer_3">
           <property name="orientation">
            <enum>Qt::Vertical</enum>
@@ -87,6 +101,13 @@
            </size>
           </property>
          </spacer>
+        </item>
+        <item>
+         <widget class="QPushButton" name="TrackPlayers">
+          <property name="text">
+           <string>TrackPlayers</string>
+          </property>
+         </widget>
         </item>
         <item>
          <spacer name="verticalSpacer">

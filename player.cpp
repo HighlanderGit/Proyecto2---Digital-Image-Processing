@@ -49,8 +49,8 @@ void Player::run()
     int delay = (1000/frameRate);
     
     // Boolean values to activate Picture in Picture or Multiplayer tracking
-    bool pipActive = true;
-    bool multiTracking = true;
+    //bool pipActive = true;
+    //bool multiTracking = true;
 
     // Stores mouse click position or past value of player for tracking.
     cv::Rect closest;
@@ -184,16 +184,17 @@ void Player::run()
             // If mouse click, change position_past to mouseclick position
             // --------------------------------------------------------
             
-            //if(Enhancement=true){
+            if(Enhancement==true){
                 cv::split(frame,ColorPlanes);
                 cv::equalizeHist(ColorPlanes[0], ColorPlanes[0]);
                 cv::equalizeHist(ColorPlanes[1], ColorPlanes[1]);
                 cv::equalizeHist(ColorPlanes[2], ColorPlanes[2]);
 
                 cv::merge(ColorPlanes,frame);
-            //}
+            }
 
 
+            //qDebug()<< "Enhancement = " << Enhancement;
 
             float distance_current = 0.0;
             float distance_past = 0.0;
@@ -212,16 +213,17 @@ void Player::run()
                     distance_past=distance_current;
 
 
-                    if (multiTracking = true){
+                    if (multiTracking == true){
 
                         cv::rectangle( frame, boundRect.tl(), boundRect.br(), cv::Scalar(255), 2, 8, 0 );
+                        qDebug()<< "multiTracking = "<< multiTracking;
                     }
                 }
 
 
             }
 
-            if(pipActive && contours.size()!=0){ // bool pipActive should be user modifiable.
+            if(PIP && contours.size()!=0){ // bool pipActive should be user modifiable.
                 //----------  Picture in Picture    ----------------
 
                 cv::Rect roi1 = cv::Rect(closest.x,closest.y,50,50);
@@ -231,7 +233,9 @@ void Player::run()
                 cv::resize(small, subView, subView.size(), 0, 0, INTER_LINEAR);
             }
             
-            
+            if(contours.size()==0 && PIP){
+                PIP=false;
+            }
             
             //-----------------------------------------------------------------------
             //-----------------------------------------------------------------------

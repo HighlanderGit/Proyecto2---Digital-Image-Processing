@@ -3,6 +3,10 @@
 #include <QDebug>
 #include <global_variables.h>
 
+bool Enhancement=false;
+bool PIP=false;
+bool multiTracking=false;
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -97,4 +101,32 @@ void MainWindow::on_horizontalSlider_sliderMoved(int position)
 {
     myPlayer->setCurrentFrame(position);
     ui->label_2->setText( getFormattedTime( position/(int)myPlayer->getFrameRate()) );
+}
+
+void MainWindow::on_enhancement_clicked()
+{
+    if (Enhancement==true){
+        Enhancement=false;
+    }else{
+        Enhancement=true;
+    }
+
+}
+
+void MainWindow::on_PIP_clicked()
+{
+    if (PIP==true){
+        PIP=false;
+    }else{
+        PIP=true;
+    }
+}
+
+void MainWindow::on_TrackPlayers_clicked()
+{
+    if (multiTracking==true){
+        multiTracking=false;
+    }else{
+        multiTracking=true;
+    }
 }
