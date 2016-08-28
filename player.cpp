@@ -216,7 +216,7 @@ void Player::run()
                     if (multiTracking == true){
 
                         cv::rectangle( frame, boundRect.tl(), boundRect.br(), cv::Scalar(255), 2, 8, 0 );
-                        qDebug()<< "multiTracking = "<< multiTracking;
+
                     }
                 }
 
