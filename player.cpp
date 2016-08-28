@@ -3,6 +3,7 @@
 //#include <opencv2/highgui/highgui.hpp>
 
 #include <QDebug>
+#include <global_variables.h>
 
 //#include <QThread>
 
@@ -183,13 +184,24 @@ void Player::run()
             // If mouse click, change position_past to mouseclick position
             // --------------------------------------------------------
             
+            //if(Enhancement=true){
+                cv::split(frame,ColorPlanes);
+                cv::equalizeHist(ColorPlanes[0], ColorPlanes[0]);
+                cv::equalizeHist(ColorPlanes[1], ColorPlanes[1]);
+                cv::equalizeHist(ColorPlanes[2], ColorPlanes[2]);
+
+                cv::merge(ColorPlanes,frame);
+            //}
+
+
+
             float distance_current = 0.0;
             float distance_past = 0.0;
 
             //Calculates the areas of the blobs and chooses if the blob is gargabe or if it a player
             for (int i = 0; i< contours.size(); i++){
 
-                if(cv::contourArea(contours[i]) > 60 && cv::contourArea(contours[i]) < 300 ){
+                if(cv::contourArea(contours[i]) > 50 && cv::contourArea(contours[i]) < 500 ){
 
                     cv::approxPolyDP( cv::Mat(contours[i]), contours_poly, 3, true );
                     boundRect = cv::boundingRect( cv::Mat(contours_poly ));

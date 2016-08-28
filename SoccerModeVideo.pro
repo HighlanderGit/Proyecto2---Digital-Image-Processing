@@ -12,7 +12,8 @@ SOURCES += main.cpp\
     player.cpp
 
 HEADERS  += mainwindow.h \
-    player.h
+    player.h \
+    global_variables.h
 FORMS    += mainwindow.ui
 
 # Opencv Library
